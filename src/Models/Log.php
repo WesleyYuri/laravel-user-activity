@@ -17,7 +17,11 @@ class Log extends Model
 
     public function getDateHumanizeAttribute()
     {
-        return $this->log_date->diffForHumans();
+        if(is_string($this->log_date)){
+            return \Carbon\Carbon::parse($this->log_date)->diffForHumans();
+        } else {
+            return $this->log_date->diffForHumans();
+        }
     }
 
     public function getJsonDataAttribute()
